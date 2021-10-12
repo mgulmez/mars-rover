@@ -18,7 +18,7 @@ namespace MarsRover
         public static CommandPackage Parse(string info)
         {
             var keys = new List<CommandKey>();
-            var command = info.Trim();
+            var command = info.Trim().ToUpper();
 
             // fazla boşlukları al
             while (command.Contains(" ")) command = command.Replace(" ", "");

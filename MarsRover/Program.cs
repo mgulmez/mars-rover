@@ -17,7 +17,14 @@ namespace MarsRover
                 var position = GetRoverPosition(order);
                 if (position == null) break;
 
-                var directive = GetDirective(order);
+                if (position.X > plateSize.Width || position.Y > plateSize.Height || position.X < 0 || position.Y < 0)
+                {
+                    Console.WriteLine("Rover bilinmeyen bir bölgeye yerleştirilmiş.");
+                    Console.WriteLine();
+                    continue;
+                }
+
+                    var directive = GetDirective(order);
                 if (directive == null) break;
 
                 var roverKnownPos = directive.ComputePosition(position);

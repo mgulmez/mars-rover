@@ -26,7 +26,7 @@ namespace MarsRover
 
         public static Position Parse(string info)
         {
-            var position = info.Replace("x", " ").Replace("-", " ");
+            var position = info.Replace("x", " ").Replace("-", " ").ToUpper();
 
             // fazla boşlukları al
             while (position.Contains("  ")) position = position.Replace("  ", "");
