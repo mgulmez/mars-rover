@@ -20,9 +20,16 @@ namespace MarsRover
                 var directive = GetDirective(order);
                 if (directive == null) break;
 
-                var directivePost = (Position)directive;
-                var lastPos = position + directivePost;
+                var roverKnownPos = directive.ComputePosition(position);
 
+                if(roverKnownPos.X > plateSize.Width || roverKnownPos.Y > plateSize.Height || roverKnownPos.X < 0 || roverKnownPos.Y < 0)
+                {
+                    Console.WriteLine("Rover bilinmeyen bir bölgede kayboldu");
+                } 
+                else if (roverKnownPos != null)
+                    Console.WriteLine($"Rover'ın bilinen son koordinatı: X:{roverKnownPos.X}, Y:{roverKnownPos.Y}, Yönü: {roverKnownPos.Direction}");
+
+                Console.WriteLine();
                 order++;
             }
         }
@@ -64,12 +71,12 @@ namespace MarsRover
                 else return GetRoverPosition(roverNo);
             }
         }
-        static Directive GetDirective(int roverNo)
+        static CommandPackage GetDirective(int roverNo)
         {
             try
             {
                 Console.Write($"Lütfen {roverNo}. sırasındaki rover'a gönderilecek komut dizisini giriniz (Örn: LMLMMRM):");
-                var position = Directive.Parse(Console.ReadLine());
+                var position = CommandPackage.Parse(Console.ReadLine());
                 return position;
             }
             catch (Exception ex)

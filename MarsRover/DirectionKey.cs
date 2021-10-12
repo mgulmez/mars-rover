@@ -1,7 +1,10 @@
-﻿namespace MarsRover
+﻿using System;
+
+namespace MarsRover
 {
-    public enum DirectionKey
+    [Flags]
+    public enum DirectionKey: int
     {
-        N, S, E, W
+        N, E, S, W
     }
 }

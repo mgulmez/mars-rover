@@ -42,13 +42,5 @@ namespace MarsRover
         }
 
         public override string ToString() => $"{X} {Y} {Direction}";
-
-        public static Position operator+(Position pos1, Position pos2)
-        {
-            var newX = pos1.X - pos2.X;
-            var newY = pos1.Y - pos2.Y;
-
-            return new Position(newX, newY, pos2.Direction);
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace MarsRover.Tests
         {
             try
             {
-                var position = Directive.Parse(info);
+                var position = CommandPackage.Parse(info);
                 Assert.Pass();
             }
             catch (SuccessException)
@@ -33,7 +33,7 @@ namespace MarsRover.Tests
         {
             try
             {
-                var position = Directive.Parse(info);
+                var position = CommandPackage.Parse(info);
                 Assert.Fail("Başarısız bir input girilmesine rağmen position doğru olarak parse etti.");
             }
             catch (SuccessException)
