@@ -24,7 +24,7 @@ namespace MarsRover
                     continue;
                 }
 
-                    var directive = GetDirective(order);
+                var directive = GetDirective(order);
                 if (directive == null) break;
 
                 var roverKnownPos = directive.ComputePosition(position);

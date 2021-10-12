@@ -9,28 +9,19 @@ namespace MarsRover.Tests
         [SetUp]
         public void Setup()
         {
-            plateSize = new PlateSize(10, 10);
+            plateSize = new PlateSize(5, 5);
         }
 
-        //[TestCase("1 1 N", "RMMLMRMLM")]
-        //public void Test1()
-        //{
-        //    Assert.Pass();
-        //}
-        [Test]
-        public void Test1()
+        [TestCase("1 2 N", "LMLMLMLMM", "1 3 N")]
+        [TestCase("3 3 E", "MMRMMRMRRM", "5 1 E")]
+        public void RoverPositionMustBeValid(string roverPos, string commands, string expectedResult)
         {
-            var directionEnums = Enum.GetValues(typeof(DirectionKey));
-            var commandEnums = Enum.GetValues(typeof(CommandKey));
-            foreach (var d in directionEnums)
-            {
-                var direction =  (DirectionKey)d;
-                foreach (var c in commandEnums)
-                {
-                    var command = (CommandKey)c;
-                    var message = $"Direction is {direction} and command is {command}. Current direction: {direction.ChangeDirection(command)}";
-                }
-            }
+            var expectedPosition = Position.Parse(expectedResult);
+
+            var roverPosition = Position.Parse(roverPos);
+            var directive = CommandPackage.Parse(commands);
+            var roverKnownPos = directive.ComputePosition(roverPosition);
+            Assert.IsTrue(expectedPosition.X == roverKnownPos.X && expectedPosition.Y == roverKnownPos.Y && expectedPosition.Direction == roverKnownPos.Direction, "Rover doðru konumda deðil!");
         }
     }
 }
